@@ -119,15 +119,19 @@
         .attr("src", element.attr("src"));
       $(`#${lightboxId}`).modal("toggle");
     },
-    prevImage() {
+    prevImage(lightboxId) {
       let activeImage = null;
+      // Parcourt toutes les images avec la classe "gallery-item".
       $("img.gallery-item").each(function() {
-        if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
-          activeImage = $(this);
+        // Vérifie si la source de l'image actuelle correspond à celle affichée dans la lightbox.
+        if ($(this).attr("src") === $(`#${lightboxId}`).find(".lightboxImage").attr("src")) {
+          activeImage = $(this); // Définit activeImage sur l'image trouvée.
         }
       });
+    
       let activeTag = $(".tags-bar span.active-tag").data("images-toggle");
       let imagesCollection = [];
+      // Si le tag actif est "all", ajoute toutes les images à la collection.
       if (activeTag === "all") {
         $(".item-column").each(function() {
           if ($(this).children("img").length) {
@@ -135,38 +139,43 @@
           }
         });
       } else {
+        // Sinon, ajoute les images correspondant au tag actif.
         $(".item-column").each(function() {
-          if (
-            $(this)
-              .children("img")
-              .data("gallery-tag") === activeTag
-          ) {
+          if ($(this).children("img").data("gallery-tag") === activeTag) {
             imagesCollection.push($(this).children("img"));
           }
         });
       }
-      let index = 0,
-        next = null;
-
-      $(imagesCollection).each(function(i) {
-        if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i ;
+    
+      let index = -1;
+      // Trouve l'index de l'image active dans la collection.
+      for (let i = 0; i < imagesCollection.length; i++) {
+        if ($(imagesCollection[i]).attr("src") === $(activeImage).attr("src")) {
+          index = i; // Définit l'index sur l'index de l'image active.
+          break;
         }
-      });
-      next =
-        imagesCollection[index] ||
-        imagesCollection[imagesCollection.length - 1];
-      $(".lightboxImage").attr("src", $(next).attr("src"));
+      }
+    
+      // Calcule l'index de l'image précédente de manière circulaire.
+      let prevIndex = (index - 1 + imagesCollection.length) % imagesCollection.length;
+      let prev = imagesCollection[prevIndex]; // Récupère l'image précédente.
+      // Met à jour la source de l'image dans la lightbox avec l'image précédente.
+      $(`#${lightboxId}`).find(".lightboxImage").attr("src", $(prev).attr("src"));
     },
-    nextImage() {
+    
+    nextImage(lightboxId) {
       let activeImage = null;
+      // Parcourt toutes les images avec la classe "gallery-item".
       $("img.gallery-item").each(function() {
-        if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
-          activeImage = $(this);
+        // Vérifie si la source de l'image actuelle correspond à celle affichée dans la lightbox.
+        if ($(this).attr("src") === $(`#${lightboxId}`).find(".lightboxImage").attr("src")) {
+          activeImage = $(this); // Définit activeImage sur l'image trouvée.
         }
       });
+    
       let activeTag = $(".tags-bar span.active-tag").data("images-toggle");
       let imagesCollection = [];
+      // Si le tag actif est "all", ajoute toutes les images à la collection.
       if (activeTag === "all") {
         $(".item-column").each(function() {
           if ($(this).children("img").length) {
@@ -174,27 +183,30 @@
           }
         });
       } else {
+        // Sinon, ajoute les images correspondant au tag actif.
         $(".item-column").each(function() {
-          if (
-            $(this)
-              .children("img")
-              .data("gallery-tag") === activeTag
-          ) {
+          if ($(this).children("img").data("gallery-tag") === activeTag) {
             imagesCollection.push($(this).children("img"));
           }
         });
       }
-      let index = 0,
-        next = null;
-
-      $(imagesCollection).each(function(i) {
-        if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i;
+    
+      let index = -1;
+      // Trouve l'index de l'image active dans la collection.
+      for (let i = 0; i < imagesCollection.length; i++) {
+        if ($(imagesCollection[i]).attr("src") === $(activeImage).attr("src")) {
+          index = i; // Définit l'index sur l'index de l'image active.
+          break;
         }
-      });
-      next = imagesCollection[index] || imagesCollection[0];
-      $(".lightboxImage").attr("src", $(next).attr("src"));
+      }
+    
+      // Calcule l'index de l'image suivante de manière circulaire.
+      let nextIndex = (index + 1) % imagesCollection.length;
+      let next = imagesCollection[nextIndex]; // Récupère l'image suivante.
+      // Met à jour la source de l'image dans la lightbox avec l'image suivante.
+      $(`#${lightboxId}`).find(".lightboxImage").attr("src", $(next).attr("src"));
     },
+    
     createLightBox(gallery, lightboxId, navigation) {
       gallery.append(`<div class="modal fade" id="${
         lightboxId ? lightboxId : "galleryLightbox"
@@ -240,7 +252,7 @@
         return;
       }
       $(".active-tag").removeClass("active active-tag");
-      $(this).addClass("active-tag");
+      $(this).addClass("active active-tag");
 
       var tag = $(this).data("images-toggle");
 
