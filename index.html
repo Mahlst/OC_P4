@@ -4,16 +4,23 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Nina Carducci</title>
-		<link rel="stylesheet" href="./assets/bootstrap/bootstrap.css">
-		<link rel="stylesheet" href="./assets/style.css">
+	
+		<!-- Préconnexion aux ressources externes -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter&family=Spectral:ital,wght@0,400;1,300;1,400;1,800&display=swap" rel="stylesheet">
-		<script src="./assets/bootstrap/bootstrap.bundle.js"></script>
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-		<script src="./assets/maugallery.js"></script>
-		<script src="./assets/scripts.js"></script>
+	
+		<!-- Chargement des feuilles de style -->
+		<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" href="./assets/style.css">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Spectral:ital,wght@0,300;0,400;0,800;1,300;1,400;1,800&display=swap" rel="stylesheet">
+	
+		<!-- Chargement des scripts avec async ou defer -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+		<script src="./assets/bootstrap/bootstrap.bundle.js" defer></script>
+		<script src="./assets/maugallery.js" defer></script>
+		<script src="./assets/scripts.js" defer></script>
 	</head>
+	
 	<body>
 		<header class="top-header">
 			<h1 class="name">Nina Carducci</h1>
@@ -60,7 +67,7 @@
 			
 			<section id="about">
 				<div class="picture left">
-					<img src="./assets/images/nina.png" alt="Une photo de Nina Carducci">
+					<img src="./assets/images/nina.jpg" alt="Une photo de Nina Carducci">
 				</div>
 				<div id="about-me">
 					<h2 class="about-me__title">À propos de moi</h2>
@@ -156,7 +163,7 @@
 					</form>
 				</div>
 				<div class="picture right">
-					<img src="./assets/images/camera.png" alt="Une photo d'un appareil photo">
+					<img src="./assets/images/camera.jpg" alt="Une photo d'un appareil photo">
 				</div>
 			</div>
 		</footer>
